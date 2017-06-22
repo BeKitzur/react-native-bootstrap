@@ -1,0 +1,20 @@
+{
+    "categories": [
+        {
+            "title": "Typography",
+            "subcategories": ["Raw Text"]
+        },
+        {
+            "title": "Buttons",
+            "subcategories": ["Default Button", "Disabled Button"]
+        },
+        {
+            "title": "Images",
+            "subcategories": ["Default Image", "Rounded Image"]
+        },
+        {
+            "title": "Pickers",
+            "subcategories": ["Default Picker", "Date Picker"]
+        }
+    ]
+}
