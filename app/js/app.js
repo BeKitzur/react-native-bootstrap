@@ -4,9 +4,9 @@ import {
 } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
-import CategoriesList from './components/CategoriesList';
-import SubcategroiesList from './components/SubcategroiesList';
-import CategoryDetails from './components/CategoryDetails';
+import CategoriesList from './components/screens/CategoriesList';
+import SubcategroiesList from './components/screens/SubcategroiesList';
+import CategoryDetails from './components/screens/CategoryDetails';
 
 const ReactNativeBootstrap = StackNavigator({
     categories: {
