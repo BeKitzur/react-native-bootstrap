@@ -32,7 +32,7 @@ const ExamplesNavigator = StackNavigator({
     }
 }, navigationConfig);
 
-const DefaultNavigator = StackNavigator({
+const AccountNavigator = StackNavigator({
     login: {
         screen: Login
     },
@@ -45,8 +45,8 @@ const DefaultNavigator = StackNavigator({
 });
 
 const ReactNativeBootstrap = DrawerNavigator({
-    default: {
-        screen: DefaultNavigator
+    account: {
+        screen: AccountNavigator
     },
     examples: {
         screen: ExamplesNavigator
