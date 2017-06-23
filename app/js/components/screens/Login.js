@@ -5,14 +5,11 @@ import {
     StyleSheet,
     TextInput,
     TouchableOpacity,
-    Platform,
     ActivityIndicator,
     AsyncStorage
 } from 'react-native';
 import appFirebase from '../../firebase';
 import { NavigationActions } from 'react-navigation';
-
-const isIOS = Platform.OS === 'ios';
 
 class WrappedInput extends Component {
     render() {
@@ -105,6 +102,7 @@ export default class Login extends Component {
                             keyboardType="email-address"
                             autoCapitalize="none"
                             autoCorrect={false}
+                            underlineColorAndroid="transparent"
                             onChangeText={(value) => this.setState({ email: value })}
                         />
 
@@ -113,6 +111,7 @@ export default class Login extends Component {
                             placeholder="Password"
                             autoCapitalize="none"
                             autoCorrect={false}
+                            underlineColorAndroid="transparent"
                             secureTextEntry={true}
                             onChangeText={(value) => this.setState({ password: value })}
                         />
@@ -167,8 +166,8 @@ const styles = StyleSheet.create({
     },
     inputContainer: {
         height: 36,
-        paddingHorizontal: isIOS ? 10 : 0,
-        borderBottomWidth: isIOS ? 1 : 0,
+        paddingHorizontal: 10,
+        borderBottomWidth: 1,
         borderBottomColor: '#ddd',
         marginBottom: 20
     },
