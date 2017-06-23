@@ -69,7 +69,7 @@ export default class InfiniteScroll extends Component {
 
         return (
             <View style={[styles.activityIndicator, style]}>
-                <ActivityIndicator size="large" color="#00ADEF" />
+                <ActivityIndicator color="#00ADEF" />
             </View>
         );
     }
