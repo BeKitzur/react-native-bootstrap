@@ -28,8 +28,8 @@ export default class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: 'admin@admin.com',
-            password: 'adminadmin',
+            email: '',
+            password: '',
             error: null,
             doingLogin: false,
             checkingIsAuthenticated: false
@@ -65,13 +65,19 @@ export default class Login extends Component {
                     refreshToken: user.refreshToken
                 };
 
-                this.setState({ doingLogin: false });
+                this.setState({
+                    doingLogin: false,
+                    error: null
+                });
                 AsyncStorage.setItem('user', JSON.stringify(user));
 
                 this.goToAcoountScreen();
             })
             .catch((err) => {
-                this.setState({ doingLogin: false });
+                this.setState({
+                    doingLogin: false,
+                    error: err.message
+                });
             });
     }
 
@@ -125,6 +131,8 @@ export default class Login extends Component {
                                     <Text style={styles.buttonText}>Log In</Text>
                             }
                         </TouchableOpacity>
+
+                        <Text style={styles.errorText}>{ this.state.error }</Text>
                     </View>
                 </View>
             );
@@ -175,5 +183,11 @@ const styles = StyleSheet.create({
         height: 36,
         fontSize: 14,
         color: '#00ADEF'
+    },
+    errorText: {
+        fontSize: 14,
+        color: 'red',
+        textAlign: 'center',
+        marginTop: 20
     }
 });
