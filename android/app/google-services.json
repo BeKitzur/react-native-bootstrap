@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1096392134400",
+    "firebase_url": "https://reactnativebootstrap-1424a.firebaseio.com",
+    "project_id": "reactnativebootstrap-1424a",
+    "storage_bucket": "reactnativebootstrap-1424a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1096392134400:android:06517ef45cb69e57",
+        "android_client_info": {
+          "package_name": "com.reactnativebootstrap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1096392134400-ighej78mvtoc7qv0t6eapqful3nh0i4c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdZVmr4HrKpLits5_8eN7taNnQi9uhEM0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
