@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Text, View, ListView, StyleSheet, TouchableOpacity } from 'react-native';
 
 import data from '../../categories';
-import SubcategoriesList from './SubcategroiesList';
 
 export default class CategoriesList extends Component {
     constructor(props) {
@@ -17,11 +16,11 @@ export default class CategoriesList extends Component {
     }
 
     static navigationOptions = {
-        title: 'Categories'
+        title: 'Components'
     };
 
     goToSubcategories(category) {
-        this.props.navigation.navigate('subcategories', { category });
+        this.props.navigation.navigate('examplesList', { category });
     }
 
     renderCategory(category) {

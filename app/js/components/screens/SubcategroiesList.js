@@ -21,7 +21,7 @@ export default class SubcategoriesList extends Component {
     });
 
     goToCategory(category, subcategory) {
-        this.props.navigation.navigate('categoryDetails', {
+        this.props.navigation.navigate('exampleDetails', {
             category,
             subcategory
         });
