@@ -19,6 +19,10 @@
         {
             "title": "Inputs",
             "subcategories": ["Input With Validation"]
+        },
+        {
+            "title": "Lists",
+            "subcategories": ["Infinite Scroll"]
         }
     ]
 }
