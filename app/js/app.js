@@ -5,12 +5,12 @@ import {
 import { StackNavigator, DrawerNavigator } from 'react-navigation';
 import MenuButton from './components/common/MenuButton';
 
-import CategoriesList from './components/screens/CategoriesList';
-import SubcategroiesList from './components/screens/SubcategroiesList';
-import CategoryDetails from './components/screens/CategoryDetails';
+import Categories from './components/screens/lists/Categories';
+import Examples from './components/screens/lists/Examples';
+import Example from './components/screens/example/Example';
 
 import Login from './components/screens/login/Login';
-import Account from './components/screens/Account';
+import Account from './components/screens/account/Account';
 
 const navigationConfig = {
     navigationOptions: (router) => ({
@@ -21,14 +21,14 @@ const navigationConfig = {
 };
 
 const ExamplesNavigator = StackNavigator({
-    categories: {
-        screen: CategoriesList
+    categoriesList: {
+        screen: Categories
     },
     examplesList: {
-        screen: SubcategroiesList
+        screen: Examples
     },
     exampleDetails: {
-        screen: CategoryDetails
+        screen: Example
     }
 }, navigationConfig);
 

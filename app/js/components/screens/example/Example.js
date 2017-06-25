@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import examples from '../examples/index';
+import { View, Text } from 'react-native';
 
-export default class CategoriesList extends Component {
+import styles from './styles';
+import examples from '../../examples/index';
+
+export default class Example extends Component {
     static navigationOptions = ({ navigation }) => ({
         title: navigation.state.params.subcategory
     });
@@ -22,10 +24,3 @@ export default class CategoriesList extends Component {
         );
     }
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 20
-    }
-});

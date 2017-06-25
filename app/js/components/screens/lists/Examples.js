@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { Text, View, ListView, StyleSheet, TouchableOpacity } from 'react-native';
+import { Text, View, ListView, TouchableOpacity } from 'react-native';
+import styles from './styles';
 
-import CategoryDetails from './CategoryDetails';
-
-export default class SubcategoriesList extends Component {
+export default class Examples extends Component {
     constructor(props) {
         super(props);
 
@@ -39,22 +38,10 @@ export default class SubcategoriesList extends Component {
 
     render() {
         return (
-            <ListView dataSource={this.state.dataSource}
-                      renderRow={this.renderSubcategory} />
+            <View style={styles.container}>
+                <ListView dataSource={this.state.dataSource}
+                          renderRow={this.renderSubcategory} />
+            </View>
         );
     }
 }
-
-const styles = StyleSheet.create({
-    row: {
-        justifyContent: 'center',
-        height: 40,
-        paddingHorizontal: 15,
-        borderBottomWidth: 1,
-        borderBottomColor: '#e2e2e2'
-    },
-    rowTitle: {
-        fontSize: 16,
-        color: '#666'
-    }
-});

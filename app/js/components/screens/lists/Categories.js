@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Text, View, ListView, StyleSheet, TouchableOpacity } from 'react-native';
+import { Text, View, ListView, TouchableOpacity } from 'react-native';
 
-import data from '../../categories';
+import styles from './styles';
+import data from '../../../categories';
 
-export default class CategoriesList extends Component {
+export default class Categories extends Component {
     constructor(props) {
         super(props);
 
@@ -35,23 +36,11 @@ export default class CategoriesList extends Component {
 
     render() {
         return (
-            <ListView
-                dataSource={this.state.dataSource}
-                renderRow={this.renderCategory} />
+            <View style={styles.container}>
+                <ListView
+                    dataSource={this.state.dataSource}
+                    renderRow={this.renderCategory} />
+            </View>
         );
     }
 }
-
-const styles = StyleSheet.create({
-    row: {
-        justifyContent: 'center',
-        height: 40,
-        paddingHorizontal: 15,
-        borderBottomWidth: 1,
-        borderBottomColor: '#e2e2e2'
-    },
-    rowTitle: {
-        fontSize: 16,
-        color: '#666'
-    }
-});

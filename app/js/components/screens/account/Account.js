@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ActivityIndicator, AsyncStorage } from 'react-native';
 import { NavigationActions } from 'react-navigation';
-import appFirebase from '../../firebase';
+
+import styles from './styles';
+import api from '../../../api';
 
 export default class Account extends Component {
     constructor(props) {
@@ -32,7 +34,7 @@ export default class Account extends Component {
         if (this.state.doingLogout) return;
 
         this.setState({ doingLogout: true });
-        appFirebase.auth().signOut()
+        api.logout()
             .then(() => {
                 this.setState({ doingLogout: false });
                 AsyncStorage.removeItem('user');
@@ -59,34 +61,3 @@ export default class Account extends Component {
         );
     }
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: 'white',
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    loggedInText: {
-        fontSize: 20,
-        textAlign: 'center',
-        marginBottom: 40
-    },
-    button: {
-        height: 40,
-        width: 140,
-        marginTop: 20,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderWidth: 1,
-        borderColor: '#00ADEF',
-        borderRadius: 20,
-        backgroundColor: 'white',
-    },
-    buttonText: {
-        fontSize: 14,
-        color: '#00ADEF',
-        backgroundColor: 'transparent'
-    },
-});
