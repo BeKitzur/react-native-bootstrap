@@ -8,21 +8,12 @@ import {
     ActivityIndicator,
     AsyncStorage
 } from 'react-native';
-import appFirebase from '../../firebase';
+
+import styles from './styles';
+import api from '../../../api';
+import TextField from '../../common/TextField';
 import { NavigationActions } from 'react-navigation';
 
-class WrappedInput extends Component {
-    render() {
-        return (
-            <View style={styles.inputContainer}>
-                <TextInput
-                    {...this.props}
-                    style={styles.input}
-                />
-            </View>
-        );
-    }
-}
 
 export default class Login extends Component {
     constructor(props) {
@@ -35,14 +26,14 @@ export default class Login extends Component {
             checkingIsAuthenticated: false
         };
         this.doLogin = this.doLogin.bind(this);
-        this.goToAcoountScreen = this.goToAcoountScreen.bind(this);
+        this.goToAccountScreen = this.goToAccountScreen.bind(this);
     }
 
     static navigationOptions = {
         title: 'Log In'
     };
 
-    goToAcoountScreen() {
+    goToAccountScreen() {
         const resetAction = NavigationActions.reset({
             index: 0,
             actions: [
@@ -57,7 +48,8 @@ export default class Login extends Component {
         if (this.state.doingLogin) return;
 
         this.setState({ doingLogin: true });
-        appFirebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
+
+        api.login(this.state.email, this.state.password)
             .then((user) => {
                 user = {
                     uid: user.uid,
@@ -69,9 +61,9 @@ export default class Login extends Component {
                     doingLogin: false,
                     error: null
                 });
-                AsyncStorage.setItem('user', JSON.stringify(user));
 
-                this.goToAcoountScreen();
+                AsyncStorage.setItem('user', JSON.stringify(user));
+                this.goToAccountScreen();
             })
             .catch((err) => {
                 this.setState({
@@ -87,7 +79,7 @@ export default class Login extends Component {
         AsyncStorage.getItem('user').then((user) => {
             this.setState({ checkingIsAuthenticated: false });
 
-            if (user) this.goToAcoountScreen();
+            if (user) this.goToAccountScreen();
         });
     }
 
@@ -102,24 +94,19 @@ export default class Login extends Component {
             return (
                 <View style={styles.container}>
                     <View style={styles.form}>
-                        <WrappedInput
-                            value={this.state.email}
-                            placeholder="Email address"
-                            keyboardType="email-address"
+                        <TextField
+                            placeholder="email"
                             autoCapitalize="none"
-                            autoCorrect={false}
-                            underlineColorAndroid="transparent"
-                            onChangeText={(value) => this.setState({ email: value })}
+                            keyboardType="email-address"
+                            onInputChange={value => this.setState({ email: value })}
+                            invalidValueMessage="Please, enter valid email address!"
+                            regex={emailRegex}
                         />
 
-                        <WrappedInput
-                            value={this.state.password}
-                            placeholder="Password"
-                            autoCapitalize="none"
-                            autoCorrect={false}
-                            underlineColorAndroid="transparent"
+                        <TextField
+                            placeholder="password"
                             secureTextEntry={true}
-                            onChangeText={(value) => this.setState({ password: value })}
+                            onInputChange={value => this.setState({password: value})}
                         />
 
                         <TouchableOpacity
@@ -140,54 +127,4 @@ export default class Login extends Component {
     }
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: 'white'
-    },
-    checkingContainer: {
-        flex: 1,
-        backgroundColor: 'white',
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    form: {
-        marginTop: 100,
-        paddingVertical: 20,
-        paddingHorizontal: 15
-    },
-    button: {
-        height: 40,
-        marginTop: 20,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderWidth: 1,
-        borderColor: '#00ADEF',
-        borderRadius: 20,
-        backgroundColor: '#00ADEF',
-    },
-    buttonText: {
-        fontSize: 14,
-        color: 'white',
-        backgroundColor: 'transparent'
-    },
-    inputContainer: {
-        height: 36,
-        paddingHorizontal: 10,
-        borderBottomWidth: 1,
-        borderBottomColor: '#ddd',
-        marginBottom: 20
-    },
-    input: {
-        height: 36,
-        fontSize: 14,
-        color: '#00ADEF'
-    },
-    errorText: {
-        fontSize: 14,
-        color: 'red',
-        textAlign: 'center',
-        marginTop: 20
-    }
-});
+const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

@@ -9,7 +9,7 @@ import CategoriesList from './components/screens/CategoriesList';
 import SubcategroiesList from './components/screens/SubcategroiesList';
 import CategoryDetails from './components/screens/CategoryDetails';
 
-import Login from './components/screens/Login';
+import Login from './components/screens/login/Login';
 import Account from './components/screens/Account';
 
 const navigationConfig = {
