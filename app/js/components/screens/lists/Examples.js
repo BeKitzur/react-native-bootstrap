@@ -1,16 +1,10 @@
 import React, { Component } from 'react';
-import { Text, View, ListView, TouchableOpacity } from 'react-native';
+import { Text, View, FlatList, TouchableOpacity } from 'react-native';
 import styles from './styles';
 
 export default class Examples extends Component {
     constructor(props) {
         super(props);
-
-        const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-        this.state = {
-            dataSource: ds.cloneWithRows(props.navigation.state.params.category.subcategories || []),
-        };
-
         this.goToCategory = this.goToCategory.bind(this);
         this.renderSubcategory = this.renderSubcategory.bind(this);
     }
@@ -26,12 +20,12 @@ export default class Examples extends Component {
         });
     }
 
-    renderSubcategory(subcategory) {
+    renderSubcategory({ item }) {
         let { category } = this.props.navigation.state.params;
 
         return (
-            <TouchableOpacity style={styles.row} onPress={() => this.goToCategory(category.title, subcategory)}>
-                <Text style={styles.rowTitle}>{ subcategory }</Text>
+            <TouchableOpacity style={styles.row} onPress={() => this.goToCategory(category.title, item)}>
+                <Text style={styles.rowTitle}>{ item }</Text>
             </TouchableOpacity>
         );
     }
@@ -39,8 +33,10 @@ export default class Examples extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <ListView dataSource={this.state.dataSource}
-                          renderRow={this.renderSubcategory} />
+                <FlatList
+                    data={this.props.navigation.state.params.category.subcategories}
+                    keyExtractor={(item, index) => index}
+                    renderItem={this.renderSubcategory} />
             </View>
         );
     }
