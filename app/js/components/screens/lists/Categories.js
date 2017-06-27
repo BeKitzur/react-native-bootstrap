@@ -21,7 +21,7 @@ export default class Categories extends Component {
     };
 
     goToSubcategories(category) {
-        this.props.navigation.navigate('examplesList', { category });
+        this.props.navigation.navigate('examples', { category });
     }
 
     renderCategory(category) {

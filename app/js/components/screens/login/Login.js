@@ -74,13 +74,13 @@ export default class Login extends Component {
     }
 
     componentDidMount() {
-        this.setState({ checkingIsAuthenticated: true });
-
-        AsyncStorage.getItem('user').then((user) => {
-            this.setState({ checkingIsAuthenticated: false });
-
-            if (user) this.goToAccountScreen();
-        });
+        // this.setState({ checkingIsAuthenticated: true });
+        //
+        // AsyncStorage.getItem('user').then((user) => {
+        //     this.setState({ checkingIsAuthenticated: false });
+        //
+        //     if (user) this.goToAccountScreen();
+        // });
     }
 
     render() {

@@ -20,7 +20,7 @@ export default class Examples extends Component {
     });
 
     goToCategory(category, subcategory) {
-        this.props.navigation.navigate('exampleDetails', {
+        this.props.navigation.navigate('example', {
             category,
             subcategory
         });
