@@ -6,7 +6,7 @@ export default class DefaultImage extends Component {
     render() {
         return (
             <View>
-                <ResponsiveImage source={ require('../../../../images/example.jpg') } />
+                <ResponsiveImage source={ require('../../../../assets/images/example.jpg') } />
             </View>
         );
     }

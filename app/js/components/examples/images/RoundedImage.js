@@ -5,7 +5,7 @@ import ResponsiveImage from '../../common/ResponsiveImage';
 export default class RoundedImage extends Component {
     render() {
         return (
-            <ResponsiveImage style={styles.image} source={require('../../../../images/example2.jpg')} />
+            <ResponsiveImage style={styles.image} source={require('../../../../assets/images/example2.jpg')} />
         );
     }
 }
