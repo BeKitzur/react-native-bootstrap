@@ -2,10 +2,13 @@ import React from 'react';
 import { Platform } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import { TabNavigator, TabBarBottom } from 'react-navigation';
+import { TabNavigator } from 'react-navigation';
+import TabBar from './components/TabBar';
 
 import AccountNavigator from './AccountNavigator';
 import ComponentsNavigator from './ComponentsNavigator';
+
+import { COLORS } from '../constants/Theme';
 
 const isIOS = Platform.OS === 'ios';
 
@@ -13,47 +16,20 @@ const config = {
     routes: {
         account: {
             screen: AccountNavigator,
-            navigationOptions: {
-                tabBarLabel: 'Account',
-                tabBarIcon: ({ focused }) =>  {
-                    if (isIOS) {
-                        return focused ?
-                            <Icon name="ios-contact" size={25} color="white" /> :
-                            <Icon name="ios-contact-outline" size={25} color="white" />;
-                    }
-                    else {
-                        return <Icon name="md-contact" size={25} color="white" />;
-                    }
-                }
-            }
+            navigationOptions: (options) => setNavigationOptions('Account', 'contact', options)
         },
         components: {
             screen: ComponentsNavigator,
-            navigationOptions: {
-                tabBarLabel: 'Components',
-                tabBarIcon: ({ focused }) =>  {
-                    if (isIOS) {
-                        return focused ?
-                            <Icon name="ios-cube" size={25} color="white" /> :
-                            <Icon name="ios-cube-outline" size={25} color="white" />;
-                    }
-                    else {
-                        return <Icon name="md-cube" size={25} color="white" />;
-                    }
-                }
-            }
+            navigationOptions: (options) => setNavigationOptions('Components', 'cube', options)
         }
     },
     navigator: {
         initialRouteName: 'account',
         tabBarPosition: 'bottom',
-        tabBarComponent: TabBarBottom,
+        tabBarComponent: TabBar,
         tabBarOptions: {
             showLabel: isIOS,
             showIcon: true,
-            activeTintColor: 'white',
-            inactiveTintColor: 'white',
-            pressColor: 'white',
             tabStyle: {
                 padding: 10
             },
@@ -61,12 +37,38 @@ const config = {
                 marginTop: -6,
                 marginBottom: 5,
                 fontSize: 12
-            },
-            style: {
-                backgroundColor: '#00ADEF'
             }
         }
     }
 };
+
+function setNavigationOptions(tabBarLabel, iconName, { navigation, screenProps, navigationOptions }) {
+    let { appTheme } = screenProps,
+        iconColor  = COLORS[appTheme].foreground;
+
+    return {
+        tabBarLabel,
+        tabBarIcon: ({ focused }) =>  {
+            if (isIOS) {
+                return focused ?
+                    getIcon('ios-' + iconName, iconColor) :
+                    getIcon('ios-' + iconName + '-outline', iconColor);
+            }
+            else {
+                return getIcon('md-' + iconName, iconColor);
+            }
+        }
+    };
+}
+
+function getIcon(iconName, iconColor) {
+    return (
+        <Icon
+            name={iconName}
+            size={25}
+            color={iconColor}
+        />
+    );
+}
 
 export default TabNavigator(config.routes, config.navigator);
