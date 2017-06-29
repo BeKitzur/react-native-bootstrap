@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
-import { Image, StyleSheet } from 'react-native';
-import ResponsiveImage from '../../common/ResponsiveImage';
+import { StyleSheet } from 'react-native';
+import { ImageView } from '../../lib';
 
 export default class RoundedImage extends Component {
     render() {
         return (
-            <ResponsiveImage style={styles.image} source={require('../../../../assets/images/example2.jpg')} />
+            <ImageView
+                style={styles.image}
+                source={require('../../../../assets/images/example2.jpg')}
+            />
         );
     }
 }
 
-const styles = {
+const styles = StyleSheet.create({
     image: {
         width: 200,
         height: 200,
-        borderRadius: 170,
+        borderRadius: 50,
     }
-};
+});

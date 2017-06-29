@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ActivityIndicator, AsyncStorage } from 'react-native';
+import { TouchableOpacity, ActivityIndicator, AsyncStorage } from 'react-native';
+import { TextView, Container, Button } from '../../lib';
 import { NavigationActions } from 'react-navigation';
 
 import styles from './styles';
 import api from '../../../api';
 
-export default class Account extends Component {
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as GlobalActions from '../../../actions/Global';
+
+class Account extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -48,16 +53,38 @@ export default class Account extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
-                <Text style={styles.loggedInText}>Your are logged in!</Text>
-                <TouchableOpacity onPress={this.doLogout} style={styles.button}>
+            <Container style={styles.container}>
+                <TextView style={styles.loggedInText}>Your are logged in!</TextView>
+                <Button onPress={this.doLogout} style={styles.button}>
                     {
                         this.state.doingLogout ?
                             <ActivityIndicator color="#00ADEF" /> :
-                            <Text style={styles.buttonText}>Log Out</Text>
+                            <TextView>Log out</TextView>
                     }
-                </TouchableOpacity>
-            </View>
+                </Button>
+
+                <Button
+                    onPress={() => this.props.actions.global.changeTheme(this.props.global.appTheme === 'light' ? 'dark' : 'light')}
+                    style={[styles.button, {marginTop: 30}]}>
+                    <TextView>Press Me</TextView>
+                </Button>
+            </Container>
         );
     }
 }
+
+function mapStateToProps (state) {
+    return {
+        global: state.Global
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: {
+            global: bindActionCreators(GlobalActions, dispatch)
+        }
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Account);

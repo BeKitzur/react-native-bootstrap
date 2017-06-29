@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { View, Text, TextInput } from 'react-native';
+import { COLORS } from '../../constants/Theme';
 
 export default class TextField extends Component {
     constructor(props) {
@@ -15,6 +16,10 @@ export default class TextField extends Component {
         this.onFocus = this.onFocus.bind(this);
         this.setHairlineColor = this.setHairlineColor.bind(this);
     }
+
+    static contextTypes = {
+        getCurrentTheme: PropTypes.func
+    };
 
     onFocus() {
         this.setState({ isFocused: true }, this.setHairlineColor);
@@ -41,12 +46,13 @@ export default class TextField extends Component {
     }
 
     setHairlineColor() {
+        let appTheme = this.context.getCurrentTheme();
         const setBorderColor = borderBottomColor => this.refs.inputContainer.setNativeProps({style: { borderBottomColor }});
 
         if (this.state.isFocused) {
-            setBorderColor(this.state.isValid ? '#00ADEF' : 'red');
+            setBorderColor(this.state.isValid ? COLORS[appTheme].foreground : 'red');
         } else {
-            setBorderColor(this.state.isValid ? '#dadada' : 'red');
+            setBorderColor(this.state.isValid ? COLORS[appTheme].accent : 'red');
         }
     }
 
@@ -59,18 +65,21 @@ export default class TextField extends Component {
     }
 
     render() {
+        let appTheme = this.context.getCurrentTheme();
+
         return (
             <View>
                 <View style={styles.container}>
-                    <View style={styles.inputContainer} ref="inputContainer">
+                    <View style={[styles.inputContainer, { borderBottomColor: COLORS[appTheme].accent}]} ref="inputContainer">
                         <TextInput
                             {...this.props}
+                            placeholderTextColor={COLORS[appTheme].foreground}
                             underlineColorAndroid="transparent"
                             onFocus={this.onFocus}
                             onEndEditing={this.validateInput}
                             onSubmitEditing={this.validateInput}
                             onChangeText={this.handleInput}
-                            style={styles.input}
+                            style={[styles.input, { color: COLORS[appTheme].foreground }]}
                         />
                     </View>
 
@@ -86,26 +95,24 @@ export default class TextField extends Component {
 const styles = {
     container: {
         position: 'relative',
-        paddingHorizontal: 10,
         marginBottom: 20,
     },
     inputContainer: {
-        height: 36,
+        height: 40,
         paddingHorizontal: 10,
-        borderBottomWidth: 1,
-        borderBottomColor: '#dadada'
+        borderBottomWidth: 1
     },
     input: {
-        height: 36,
-        fontSize: 14,
+        height: 40,
+        fontSize: 18,
         color: '#666'
     },
     errorText: {
         color: 'red',
-        fontSize: 12,
+        fontSize: 14,
         position: 'absolute',
-        top: 41,
-        left: 10,
-        right: 10
+        top: 44,
+        left: 0,
+        right: 0
     }
 };

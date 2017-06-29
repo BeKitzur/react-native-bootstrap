@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { Container, TextView } from '../../lib';
 
 import styles from './styles';
 import examples from '../../examples/index';
@@ -11,16 +11,15 @@ export default class Example extends Component {
 
     render() {
         let { category, subcategory } = this.props.navigation.state.params;
-        console.log(category, subcategory);
 
         let categoryName = category.replace(/\s/g, ''),
             componentName = subcategory.replace(/\s/g, ''),
             component = examples[categoryName][componentName];
 
         return (
-            <View style={styles.container}>
-                { component || <View><Text>Component not found :(</Text></View> }
-            </View>
+            <Container style={styles.container}>
+                { component || <TextView>Component not found :(</TextView> }
+            </Container>
         );
     }
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import MyDatePickerIOS from '../../common/MyDatePickerIOS';
+import { DatePicker } from '../../lib';
 
-export default class DatePicker extends Component {
+export default class DatePickerExample extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -11,7 +11,7 @@ export default class DatePicker extends Component {
 
     render() {
         return (
-            <MyDatePickerIOS
+            <DatePicker
                 date={this.state.date}
                 onSubmit={(date) => this.setState({date})}
             />

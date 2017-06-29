@@ -5,24 +5,16 @@
             "subcategories": ["Raw Text"]
         },
         {
-            "title": "Buttons",
-            "subcategories": ["Default Button", "Disabled Button"]
-        },
-        {
             "title": "Images",
             "subcategories": ["Default Image", "Rounded Image"]
         },
         {
-            "title": "Pickers",
-            "subcategories": ["Default Picker", "Date Picker"]
-        },
-        {
-            "title": "Inputs",
-            "subcategories": ["Input With Validation"]
-        },
-        {
             "title": "Lists",
             "subcategories": ["Infinite Scroll"]
+        },
+        {
+            "title": "Controls",
+            "subcategories": ["Button", "Switch", "Picker", "Date Picker", "Input With Validation"]
         }
     ]
 }

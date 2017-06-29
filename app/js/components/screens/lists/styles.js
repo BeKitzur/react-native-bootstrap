@@ -11,10 +11,6 @@ export default StyleSheet.create({
         height: 54,
         paddingHorizontal: 15,
         borderBottomWidth: 1,
-        borderBottomColor: '#e2e2e2'
-    },
-    rowTitle: {
-        fontSize: 18,
-        color: '#666'
+        borderBottomColor: 'rgba(0,0,0, 0.1)'
     }
 });

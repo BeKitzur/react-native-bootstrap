@@ -28,7 +28,6 @@ export default StyleSheet.create({
         backgroundColor: '#00ADEF',
     },
     buttonText: {
-        fontSize: 14,
         color: 'white',
         backgroundColor: 'transparent'
     },
@@ -41,11 +40,10 @@ export default StyleSheet.create({
     },
     input: {
         height: 36,
-        fontSize: 14,
+        fontSize: 18,
         color: '#00ADEF'
     },
     errorText: {
-        fontSize: 14,
         color: 'red',
         textAlign: 'center',
         marginTop: 20

@@ -2,13 +2,10 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
     container: {
-        flex: 1,
-        backgroundColor: 'white',
         alignItems: 'center',
         justifyContent: 'center'
     },
     loggedInText: {
-        fontSize: 20,
         textAlign: 'center',
         marginBottom: 40
     },
@@ -25,7 +22,6 @@ export default StyleSheet.create({
         backgroundColor: 'white',
     },
     buttonText: {
-        fontSize: 14,
         color: '#00ADEF',
         backgroundColor: 'transparent'
     },

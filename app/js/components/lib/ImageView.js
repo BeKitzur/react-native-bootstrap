@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Image, View } from 'react-native';
 
-export default class ResponsiveImage extends Component {
+export default class ImageView extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -34,7 +34,10 @@ export default class ResponsiveImage extends Component {
 
     render() {
         return (
-            <View ref="imageContainer" collapsable={false} onLayout={this.computeImageSize}>
+            <View
+                ref="imageContainer"
+                collapsable={false}
+                onLayout={this.computeImageSize}>
                 <Image {...this.props}
                        ref="imageElement"
                        style={[this.props.style, this.state.style]} />

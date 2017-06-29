@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, FlatList, TouchableOpacity } from 'react-native';
+import { TextView, Container } from '../../lib';
 import styles from './styles';
 
 export default class Examples extends Component {
@@ -25,19 +26,19 @@ export default class Examples extends Component {
 
         return (
             <TouchableOpacity style={styles.row} onPress={() => this.goToCategory(category.title, item)}>
-                <Text style={styles.rowTitle}>{ item }</Text>
+                <TextView style={styles.rowTitle}>{ item }</TextView>
             </TouchableOpacity>
         );
     }
 
     render() {
         return (
-            <View style={styles.container}>
+            <Container>
                 <FlatList
                     data={this.props.navigation.state.params.category.subcategories}
                     keyExtractor={(item, index) => index}
                     renderItem={this.renderSubcategory} />
-            </View>
+            </Container>
         );
     }
 }

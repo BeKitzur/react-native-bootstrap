@@ -1,28 +1,46 @@
 import React, { Component, PropTypes } from 'react';
 import {
-    Text,
     View,
     StyleSheet,
-    DatePickerIOS,
+    Picker,
     Dimensions,
     TouchableOpacity,
     Modal
 } from 'react-native';
+import TextView from '../TextView';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const window = Dimensions.get('window');
 
-export default class MyDatePickerIOS extends Component {
+export default class PickerIOS extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            date: props.date,
+            selectedValue: props.selectedItem,
             pickerIsVisible: false
         };
         this.showPicker = this.showPicker.bind(this);
         this.hidePicker = this.hidePicker.bind(this);
         this.submitChanges = this.submitChanges.bind(this);
-        this.handleDateChange = this.handleDateChange.bind(this);
+        this.renderOptions = this.renderOptions.bind(this);
+        this.handleValueChange = this.handleValueChange.bind(this);
+    }
+
+    static propTypes = {
+        items: PropTypes.array.isRequired,
+        selectedItem: PropTypes.number.isRequired,
+        onSubmit: PropTypes.func.isRequired,
+        textLabelStyles: PropTypes.object
+    };
+
+    renderOptions() {
+        return this.props.items.map((option, index) => (
+            <Picker.Item
+                key={index}
+                label={option.label}
+                value={option.value}
+            />
+        ));
     }
 
     showPicker() {
@@ -38,19 +56,21 @@ export default class MyDatePickerIOS extends Component {
     }
 
     submitChanges() {
-        this.props.onSubmit(this.state.date);
+        this.props.onSubmit(this.state.selectedValue);
         this.setState({ pickerIsVisible: false });
     }
 
-    handleDateChange(date) {
-        this.setState({ date });
+    handleValueChange(value, index) {
+        this.setState({
+            selectedValue: index
+        });
     }
 
     render() {
         return (
             <View>
                 <TouchableOpacity onPress={this.showPicker}>
-                    <Text style={this.props.textLabelStyles}>{this.props.date.toLocaleDateString()}</Text>
+                    <TextView style={this.props.textLabelStyles}>{this.props.items[this.state.selectedValue].label}</TextView>
                 </TouchableOpacity>
 
                 <Modal visible={this.state.pickerIsVisible}
@@ -69,11 +89,10 @@ export default class MyDatePickerIOS extends Component {
                             </TouchableOpacity>
                         </View>
 
-                        <DatePickerIOS
-                            date={this.state.date}
-                            mode="date"
-                            onDateChange={this.handleDateChange}
-                        />
+                        <Picker selectedValue={this.state.selectedValue}
+                                onValueChange={this.handleValueChange}>
+                            { this.renderOptions() }
+                        </Picker>
 
                     </View>
 
@@ -82,12 +101,6 @@ export default class MyDatePickerIOS extends Component {
         );
     }
 }
-
-MyDatePickerIOS.propTypes = {
-    date: PropTypes.object,
-    onSubmit: PropTypes.func.isRequired,
-    textLabelStyles: PropTypes.object
-};
 
 const styles = StyleSheet.create({
     modal: {

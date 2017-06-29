@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
-import TextField from '../../common/TextField';
+import { TextField, TextView } from '../../lib';
 
 export default class InputWithValidation extends Component {
     render() {
         return (
             <View>
                 <TextField
+                    placeholder="Email address"
                     onInputChange={() => {}}
                     keyboardType="email-address"
                     autoCapitalize="none"
                     invalidValueMessage="Please, enter valid email address!"
                     regex={emailRegex}
                 />
-                <Text style={styles.exampleText}>e.g. example@example.com</Text>
+                <TextView style={styles.exampleText}>e.g. example@example.com</TextView>
             </View>
         );
     }
@@ -21,7 +22,6 @@ export default class InputWithValidation extends Component {
 
 const styles = {
     exampleText: {
-        fontSize: 16,
         color: '#ccc'
     }
 };

@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import {
     View,
-    Text,
-    StyleSheet,
-    TextInput,
     TouchableOpacity,
     ActivityIndicator,
     AsyncStorage
@@ -11,9 +8,8 @@ import {
 
 import styles from './styles';
 import api from '../../../api';
-import TextField from '../../common/TextField';
+import { TextField, TextView, Container, Button } from '../../lib';
 import { NavigationActions } from 'react-navigation';
-
 
 export default class Login extends Component {
     constructor(props) {
@@ -74,13 +70,13 @@ export default class Login extends Component {
     }
 
     componentDidMount() {
-        // this.setState({ checkingIsAuthenticated: true });
-        //
-        // AsyncStorage.getItem('user').then((user) => {
-        //     this.setState({ checkingIsAuthenticated: false });
-        //
-        //     if (user) this.goToAccountScreen();
-        // });
+        this.setState({ checkingIsAuthenticated: true });
+
+        AsyncStorage.getItem('user').then((user) => {
+            this.setState({ checkingIsAuthenticated: false });
+
+            if (user) this.goToAccountScreen();
+        });
     }
 
     render() {
@@ -92,7 +88,7 @@ export default class Login extends Component {
             );
         } else {
             return (
-                <View style={styles.container}>
+                <Container>
                     <View style={styles.form}>
                         <TextField
                             placeholder="email"
@@ -109,19 +105,17 @@ export default class Login extends Component {
                             onInputChange={value => this.setState({password: value})}
                         />
 
-                        <TouchableOpacity
-                            onPress={this.doLogin}
-                            style={styles.button}>
+                        <Button onPress={this.doLogin}>
                             {
                                 this.state.doingLogin ?
                                     <ActivityIndicator color="white" /> :
-                                    <Text style={styles.buttonText}>Log In</Text>
+                                    <TextView>Log In</TextView>
                             }
-                        </TouchableOpacity>
+                        </Button>
 
-                        <Text style={styles.errorText}>{ this.state.error }</Text>
+                        <TextView style={styles.errorText}>{ this.state.error }</TextView>
                     </View>
-                </View>
+                </Container>
             );
         }
     }
