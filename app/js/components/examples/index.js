@@ -1,12 +1,10 @@
-import Images from './images';
-import Typography from './typography';
 import Lists from './lists';
 import Controls from './controls';
 import Dialogs from './dialogs';
+import Views from './views';
 
 export default {
-    Images,
-    Typography,
+    Views,
     Lists,
     Controls,
     Dialogs
