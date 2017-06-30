@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ListView, ActivityIndicator} from 'react-native';
+import { Container, Spinner, TextView } from '../../lib';
+import { View, Text, StyleSheet, ListView} from 'react-native';
 
 import api from '../../../api';
 
@@ -59,25 +60,26 @@ export default class InfiniteScroll extends Component {
 
     renderItem(item) {
         return (
-            <View style={styles.listItem}>
-                <Text style={styles.listItemHeading}>{ item.name }</Text>
-                <Text>{ item.body }</Text>
-            </View>
+            <Container style={styles.listItem}>
+                <TextView style={styles.listItemHeading}>{ item.name }</TextView>
+                <TextView>{ item.body }</TextView>
+            </Container>
         );
     }
 
     showActivityIndicator(isInitial) {
-        let style = isInitial ? { flex: 1 } : {};
+        let style = isInitial ? { flex: 1 } : {},
+            size = isInitial ? 'large' : 'small';
 
         if (this.state.couldLoadMore) {
             return (
                 <View style={[styles.activityIndicator, style]}>
-                    <ActivityIndicator color="#00ADEF" />
+                    <Spinner size={size} />
                 </View>
             );
         } else {
             return (
-                <Text style={styles.allLoadedText}>All items loaded</Text>
+                <TextView style={styles.allLoadedText}>All items loaded</TextView>
             );
         }
     }
@@ -112,9 +114,6 @@ const styles = StyleSheet.create({
     listContainer: {
         flex: 1
     },
-    loaderContainer: {
-
-    },
     activityIndicator: {
         alignItems: 'center',
         justifyContent: 'center',
@@ -123,24 +122,21 @@ const styles = StyleSheet.create({
     },
     listItem: {
         padding: 15,
-        backgroundColor: 'white',
         borderWidth: 1,
-        borderColor: '#ddd',
+        borderColor: 'rgba(0,0,0,0.25)',
         borderRadius: 3,
-        marginHorizontal: 15,
-        marginVertical: 10
+        marginHorizontal: 10,
+        marginVertical: 5
     },
     listItemHeading: {
-        fontSize: 16,
+        fontSize: 22,
         fontWeight: "400",
-        color: 'black',
         marginBottom: 10
     },
     allLoadedText: {
-        color: '#bbb',
+        fontSize: 14,
         textAlign: 'center',
-        marginTop: 10,
+        marginTop: 15,
         marginBottom: 20
     }
 });
-
