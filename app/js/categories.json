@@ -15,6 +15,10 @@
         {
             "title": "Controls",
             "subcategories": ["Button", "Switch", "Picker", "Date Picker", "Input With Validation"]
+        },
+        {
+            "title": "Dialogs",
+            "subcategories": ["Alert", "Snackbar"]
         }
     ]
 }
