@@ -1,12 +1,8 @@
 {
     "categories": [
         {
-            "title": "Typography",
-            "subcategories": ["Raw Text"]
-        },
-        {
-            "title": "Images",
-            "subcategories": ["Default Image", "Rounded Image"]
+            "title": "Views",
+            "subcategories": ["Text", "Image", "Spinner"]
         },
         {
             "title": "Lists",
