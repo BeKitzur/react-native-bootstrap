@@ -1,11 +1,11 @@
-export const AUTH_START      = 'AUTH_START';
-export const AUTH_SUCCESS    = 'AUTH_SUCCESS';
-export const AUTH_FAIL       = 'AUTH_FAIL';
+export const LOGIN_START      = 'LOGIN_START';
+export const LOGIN_SUCCESS    = 'LOGIN_SUCCESS';
+export const LOGIN_FAIL       = 'LOGIN_FAIL';
 
 export const LOGOUT_START    = 'LOGOUT_START';
 export const LOGOUT_SUCCESS  = 'LOGOUT_SUCCESS';
 export const LOGOUT_FAIL     = 'LOGOUT_FAIL';
 
-export const CHECK_START     = 'CHECK_START';
-export const CHECK_SUCCESS   = 'CHECK_SUCCESS';
-export const CHECK_FAIL      = 'CHECK_FAIL';
+export const GET_AUTHENTICATED_ACCOUNT_START     = 'GET_AUTHENTICATED_ACCOUNT_START';
+export const GET_AUTHENTICATED_ACCOUNT_SUCCESS   = 'GET_AUTHENTICATED_ACCOUNT_SUCCESS';
+export const GET_AUTHENTICATED_ACCOUNT_FAIL      = 'GET_AUTHENTICATED_ACCOUNT_FAIL';

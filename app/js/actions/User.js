@@ -1,30 +1,30 @@
 import {
-    AUTH_START, AUTH_SUCCESS, AUTH_FAIL,
+    LOGIN_START, LOGIN_SUCCESS, LOGIN_FAIL,
     LOGOUT_START, LOGOUT_SUCCESS, LOGOUT_FAIL,
-    CHECK_START, CHECK_SUCCESS, CHECK_FAIL
+    GET_AUTHENTICATED_ACCOUNT_START, GET_AUTHENTICATED_ACCOUNT_SUCCESS, GET_AUTHENTICATED_ACCOUNT_FAIL
 } from '../constants/User';
 import appFirebase from '../firebase';
 import * as Keychain from 'react-native-keychain';
 
 export function logIn(email, password, onLoginSuccess) {
-    return (dispatch, getState) => {
-        dispatch({ type: AUTH_START, payload: { email, password } });
+    return (dispatch) => {
+        dispatch({ type: LOGIN_START, payload: { email, password } });
 
         return appFirebase.auth().signInWithEmailAndPassword(email, password)
             .then(async () => {
                 Keychain.setGenericPassword(email, password);
 
-                dispatch({ type: AUTH_SUCCESS });
+                dispatch({ type: LOGIN_SUCCESS });
                 onLoginSuccess();
             })
             .catch((err) => {
-                dispatch({ type: AUTH_FAIL, payload: err.message });
+                dispatch({ type: LOGIN_FAIL, payload: err.message });
             });
     };
 }
 
 export function logOut(onLogoutSuccess) {
-    return (dispatch, getState) => {
+    return (dispatch) => {
         dispatch({ type: LOGOUT_START });
 
         return appFirebase.auth().signOut()
@@ -38,14 +38,14 @@ export function logOut(onLogoutSuccess) {
 
 export function getAuthenticatedAccount() {
     return async (dispatch) => {
-        dispatch({ type: CHECK_START });
+        dispatch({ type: GET_AUTHENTICATED_ACCOUNT_START });
 
         try {
             let credentials = await Keychain.getGenericPassword();
-            dispatch({ type: CHECK_SUCCESS, payload: credentials });
+            dispatch({ type: GET_AUTHENTICATED_ACCOUNT_SUCCESS, payload: credentials });
         }
         catch(err) {
-            dispatch({ type: CHECK_FAIL, payload: err.message });
+            dispatch({ type: GET_AUTHENTICATED_ACCOUNT_FAIL, payload: err.message });
         }
     };
 }

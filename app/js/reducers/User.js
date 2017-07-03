@@ -1,7 +1,7 @@
 import {
-    SET_USER,
-    AUTH_START, AUTH_SUCCESS, AUTH_FAIL,
-    CHECK_START, CHECK_SUCCESS, CHECK_FAIL
+    LOGIN_START, LOGIN_SUCCESS, LOGIN_FAIL,
+    LOGOUT_START, LOGOUT_SUCCESS, LOGOUT_FAIL,
+    GET_AUTHENTICATED_ACCOUNT_START, GET_AUTHENTICATED_ACCOUNT_SUCCESS, GET_AUTHENTICATED_ACCOUNT_FAIL
 } from '../constants/User';
 
 const initialState = {
@@ -17,7 +17,7 @@ export default function User(state = initialState, action) {
     switch (type) {
 
         /* logIn */
-        case AUTH_START:
+        case LOGIN_START:
             return {
                 ...state,
                 account: {
@@ -27,34 +27,53 @@ export default function User(state = initialState, action) {
                 },
                 inProgress: true
             };
-        case AUTH_SUCCESS:
+        case LOGIN_SUCCESS:
             return {
                 ...state,
                 authenticated: true,
                 inProgress: false,
                 error: ''
             };
-        case AUTH_FAIL:
+        case LOGIN_FAIL:
             return {
                 ...state,
                 error: payload,
                 inProgress: false
             };
 
-        /* getAuthenticatedAccount */
-        case CHECK_START:
+        /* logOut */
+        case LOGOUT_START:
             return {
                 ...state,
                 inProgress: true
             };
-        case CHECK_SUCCESS:
+        case LOGOUT_SUCCESS:
+            return {
+                ...state,
+                authenticated: false,
+                inProgress: false
+            };
+        case LOGOUT_FAIL:
+            return {
+                ...state,
+                inProgress: false
+            };
+
+
+        /* getAuthenticatedAccount */
+        case GET_AUTHENTICATED_ACCOUNT_START:
+            return {
+                ...state,
+                inProgress: true
+            };
+        case GET_AUTHENTICATED_ACCOUNT_SUCCESS:
             return {
                 ...state,
                 account: payload,
                 authenticated: true,
                 inProgress: false
             };
-        case CHECK_FAIL:
+        case GET_AUTHENTICATED_ACCOUNT_FAIL:
             return {
                 ...state,
                 account: payload,
