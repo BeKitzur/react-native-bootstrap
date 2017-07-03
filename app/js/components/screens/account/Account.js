@@ -43,7 +43,7 @@ class Account extends Component {
     render() {
         return (
             <Container style={styles.container}>
-                <TextView style={styles.loggedInText}>Your are logged in!</TextView>
+                <TextView style={styles.loggedInText}>You are logged in!</TextView>
                 <Button onPress={this.doLogout} style={styles.button}>
                     {
                         this.state.doingLogout ?

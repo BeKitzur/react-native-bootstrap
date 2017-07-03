@@ -13,14 +13,14 @@ export default class AlertExample extends Component {
 	showConfirmationDialog() {
 		Alert.alert(
 			'Confirmation title',
-			'Confirm or dissmiss action',
+			'Confirm or dismiss action',
 			[
 				{
 					text: 'Confirm',
 					onPress: () => {}
 				},
 				{
-					text: 'Dissmiss',
+					text: 'Dismiss',
 					onPress: () => {},
 					style: 'cancel'
 				}
