@@ -6,6 +6,9 @@ import styles from './styles';
 export default class Examples extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            updateCondition: Math.random()
+        };
         this.goToCategory = this.goToCategory.bind(this);
         this.renderSubcategory = this.renderSubcategory.bind(this);
     }
@@ -31,11 +34,20 @@ export default class Examples extends Component {
         );
     }
 
+    componentDidUpdate(prevProps) {
+        if (prevProps.screenProps.appTheme !== this.props.screenProps.appTheme) {
+            this.setState({
+                updateCondition: Math.random()
+            });
+        }
+    }
+
     render() {
         return (
             <Container>
                 <FlatList
                     data={this.props.navigation.state.params.category.subcategories}
+                    extraData={this.state}
                     keyExtractor={(item, index) => index}
                     renderItem={this.renderSubcategory} />
             </Container>
