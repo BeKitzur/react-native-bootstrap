@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TouchableOpacity, ActivityIndicator, AsyncStorage } from 'react-native';
+import { ActivityIndicator, AsyncStorage, NativeModules } from 'react-native';
 import { TextView, Container, Button } from '../../lib';
 import { NavigationActions } from 'react-navigation';
 
@@ -8,6 +8,7 @@ import api from '../../../api';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { logOut } from '../../../actions/User';
 import * as GlobalActions from '../../../actions/Global';
 
 class Account extends Component {
@@ -36,19 +37,7 @@ class Account extends Component {
     }
 
     doLogout() {
-        if (this.state.doingLogout) return;
-
-        this.setState({ doingLogout: true });
-        api.logout()
-            .then(() => {
-                this.setState({ doingLogout: false });
-                AsyncStorage.removeItem('user');
-
-                this.goToLoginScreen();
-            })
-            .catch((err) => {
-                this.setState({ doingLogout: false });
-            });
+        this.props.actions.user.logOut(this.goToLoginScreen);
     }
 
     render() {
@@ -82,7 +71,8 @@ function mapStateToProps (state) {
 function mapDispatchToProps(dispatch) {
     return {
         actions: {
-            global: bindActionCreators(GlobalActions, dispatch)
+            global: bindActionCreators(GlobalActions, dispatch),
+            user: bindActionCreators({ logOut }, dispatch)
         }
     };
 }

@@ -7,7 +7,6 @@ export default StyleSheet.create({
     },
     checkingContainer: {
         flex: 1,
-        backgroundColor: 'white',
         justifyContent: 'center',
         alignItems: 'center'
     },

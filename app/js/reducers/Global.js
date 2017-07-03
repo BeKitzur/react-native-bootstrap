@@ -1,7 +1,7 @@
 import { CHANGE_THEME } from '../constants/Global';
 
 const initialState = {
-    appTheme: 'dark'
+    appTheme: 'light'
 };
 
 export default function Global(state = initialState, action) {
