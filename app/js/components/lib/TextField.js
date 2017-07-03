@@ -6,7 +6,7 @@ export default class TextField extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: '',
+            value: props.defaultValue,
             isFocused: false,
             isValid: true
         };
@@ -25,8 +25,16 @@ export default class TextField extends Component {
         this.setState({ isFocused: true }, this.setHairlineColor);
     }
 
+    get value() {
+        return this.state.value;
+    }
+
     handleInput(value) {
-        this.setState({ value }, this.props.onInputChange(value));
+        let { onInputChange } = this.props;
+
+        this.setState({ value }, () => {
+            if (onInputChange) onInputChange(value);
+        });
     }
 
     validateInput() {
