@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import AppNavigator from '../navigation/AppNavigator';
 import * as NavigationActions from '../actions/Navigation';
 import { getAuthenticatedAccount } from '../actions/User';
+import SplashScreen from 'react-native-splash-screen'
 
 class App extends Component {
     getChildContext() {
@@ -20,6 +21,7 @@ class App extends Component {
     componentDidMount() {
         this.props.actions.user.getAuthenticatedAccount()
             .then(() => {
+                SplashScreen.hide();
                 return this.props.user.authenticated ?
                     this.props.actions.navigation.setInitialRoute('account') :
                     null;
