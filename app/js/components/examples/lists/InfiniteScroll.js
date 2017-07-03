@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Spinner, TextView } from '../../lib';
-import { View, Text, StyleSheet, ListView} from 'react-native';
-
-import api from '../../../api';
+import { View, StyleSheet, ListView} from 'react-native';
 
 export default class InfiniteScroll extends Component {
     constructor(props) {
@@ -35,7 +33,10 @@ export default class InfiniteScroll extends Component {
     }
 
     _fetchItems() {
-        api.getComments(this.state.page).then((res) => {
+        fetch({
+            method: 'GET',
+            url: 'https://jsonplaceholder.typicode.com/comments?&_page=' + this.state.page
+        }).then((res) => {
                 res.json().then(data => {
                     if (data.length) {
                         data = this.state.items ? [...this.state.items, ...data] : data;
