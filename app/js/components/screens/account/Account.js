@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, AsyncStorage, NativeModules } from 'react-native';
 import { TextView, Container, Button } from '../../lib';
 import { NavigationActions } from 'react-navigation';
 
 import styles from './styles';
-import api from '../../../api';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -41,21 +39,19 @@ class Account extends Component {
     }
 
     render() {
+        let alternativeTheme = this.props.global.appTheme === 'light' ? 'dark' : 'light';
+
         return (
             <Container style={styles.container}>
                 <TextView style={styles.loggedInText}>You are logged in!</TextView>
                 <Button onPress={this.doLogout} style={styles.button}>
-                    {
-                        this.state.doingLogout ?
-                            <ActivityIndicator color="#00ADEF" /> :
-                            <TextView>Log out</TextView>
-                    }
+                    <TextView>Log out</TextView>
                 </Button>
 
                 <Button
-                    onPress={() => this.props.actions.global.changeTheme(this.props.global.appTheme === 'light' ? 'dark' : 'light')}
+                    onPress={() => this.props.actions.global.changeTheme(alternativeTheme)}
                     style={[styles.button, {marginTop: 30}]}>
-                    <TextView>Press Me</TextView>
+                    <TextView>Switch to { alternativeTheme } theme</TextView>
                 </Button>
             </Container>
         );
