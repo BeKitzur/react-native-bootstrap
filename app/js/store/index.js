@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
-
 import { createLogger } from 'redux-logger';
+import thunk from 'redux-thunk';
 
 import Global from '../reducers/Global';
 import Navigation from '../reducers/Navigation';
@@ -16,5 +16,5 @@ const appReducers = combineReducers({
 
 export default createStore(
     appReducers,
-    applyMiddleware(logger)
+    applyMiddleware(thunk, logger)
 );
