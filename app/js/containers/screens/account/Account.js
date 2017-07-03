@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TextView, Container, Button } from '../../lib';
+import { TextView, Container, Button } from '../../../components/lib/index';
 import { NavigationActions } from 'react-navigation';
 
 import styles from './styles';

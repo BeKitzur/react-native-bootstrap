@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 
 import styles from './styles';
-import { TextField, TextView, Container, Button, Spinner } from '../../lib';
+import { TextField, TextView, Container, Button, Spinner } from '../../../components/lib/index';
 import { NavigationActions } from 'react-navigation';
 
 import { connect } from 'react-redux';

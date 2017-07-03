@@ -1,8 +1,8 @@
 import React from 'react';
 import { StackNavigator } from 'react-navigation';
 
-import Login from '../components/screens/login/Login';
-import Account from '../components/screens/account/Account';
+import Login from '../containers/screens/login/Login';
+import Account from '../containers/screens/account/Account';
 
 import { COLORS } from '../constants/Theme';
 
