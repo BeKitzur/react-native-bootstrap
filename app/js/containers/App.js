@@ -1,11 +1,13 @@
 import React, { Component, PropTypes } from 'react';
+import { StatusBar } from 'react-native';
 import { addNavigationHelpers } from 'react-navigation';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import AppNavigator from '../navigation/AppNavigator';
 import * as NavigationActions from '../actions/Navigation';
 import { getAuthenticatedAccount } from '../actions/User';
-import SplashScreen from 'react-native-splash-screen'
+import SplashScreen from 'react-native-splash-screen';
+import { COLORS } from '../constants/Theme';
 
 class App extends Component {
     getChildContext() {
@@ -28,7 +30,16 @@ class App extends Component {
             });
     }
 
+    _setBarStyle(appTheme) {
+        let barStyle = appTheme === 'dark' ? 'light-content' : 'dark-content';
+
+        StatusBar.setBarStyle(barStyle, true);
+        StatusBar.setBackgroundColor(COLORS[appTheme].accent, true);
+    }
+
     render() {
+        this._setBarStyle(this.props.global.appTheme);
+
         return (
             <AppNavigator
                 screenProps={{appTheme: this.props.global.appTheme}}
