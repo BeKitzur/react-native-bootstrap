@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ReactNativeBootstrap</string>
+    <string name="authtype">ReactNativeBootstrap</string>
 </resources>

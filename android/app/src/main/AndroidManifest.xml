@@ -5,6 +5,9 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.MANAGE_DOCUMENTS" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
 
     <uses-sdk
         android:minSdkVersion="16"
@@ -16,6 +19,7 @@
       android:label="@string/app_name"
       android:icon="@mipmap/ic_launcher"
       android:theme="@style/AppTheme">
+
       <activity
         android:name=".MainActivity"
         android:label="@string/app_name"
@@ -26,7 +30,19 @@
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
       </activity>
-      <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
-    </application>
 
+      <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
+
+      <service
+        android:name=".RNBootstrapAuthenticationService"
+        android:exported="false" >
+          <intent-filter>
+          <action android:name="android.accounts.AccountAuthenticator" />
+        </intent-filter>
+        <meta-data
+          android:name="android.accounts.AccountAuthenticator"
+          android:resource="@xml/authenticator" />
+      </service>
+
+    </application>
 </manifest>

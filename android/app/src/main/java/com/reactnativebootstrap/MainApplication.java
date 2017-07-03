@@ -1,8 +1,10 @@
 package com.reactnativebootstrap;
+import com.reactnativebootstrap.accountmanager.AccountManagerPackage;
 
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.oblador.keychain.KeychainPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.azendoo.reactnativesnackbar.SnackbarPackage;
 import com.facebook.react.ReactNativeHost;
@@ -25,8 +27,10 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new KeychainPackage(),
           new VectorIconsPackage(),
-          new SnackbarPackage()
+          new SnackbarPackage(),
+          new AccountManagerPackage()
       );
     }
   };
