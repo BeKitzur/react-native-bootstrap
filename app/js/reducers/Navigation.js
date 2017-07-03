@@ -1,3 +1,4 @@
+import { SET_INITIAL_ROUTE } from '../constants/Navigation';
 import AppNavigator from '../navigation/AppNavigator';
 
 const initialState = AppNavigator.router.getStateForAction('login');
@@ -7,7 +8,7 @@ export default function Navigation(state = initialState, action) {
     const nextState = AppNavigator.router.getStateForAction(action, state);
 
     switch (type) {
-        case 'SET_INITIAL_ROUTE':
+        case SET_INITIAL_ROUTE:
             return payload;
 
         default:

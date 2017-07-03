@@ -1,3 +1,4 @@
+import { SET_INITIAL_ROUTE } from '../constants/Navigation';
 import { NavigationActions } from 'react-navigation';
 import AppNavigator from '../navigation/AppNavigator';
 
@@ -14,7 +15,7 @@ export function setInitialRoute(routeName) {
 	);
 
 	return {
-		type: 'SET_INITIAL_ROUTE',
+		type: SET_INITIAL_ROUTE,
 		payload: state
 	};
 }

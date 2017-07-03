@@ -1,0 +1,1 @@
+export const SET_INITIAL_ROUTE = 'SET_INITIAL_ROUTE';
