@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import TextView from '../TextView';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { COLORS } from '../../../constants/Theme';
 
 const window = Dimensions.get('window');
 
@@ -24,6 +25,10 @@ export default class DatePicker extends Component {
         this.submitChanges = this.submitChanges.bind(this);
         this.handleDateChange = this.handleDateChange.bind(this);
     }
+
+    static contextTypes = {
+        getCurrentTheme: PropTypes.func
+    };
 
     static propTypes = {
         date: PropTypes.object,
@@ -54,10 +59,15 @@ export default class DatePicker extends Component {
     }
 
     render() {
+        let appTheme = this.context.getCurrentTheme();
+        console.log(this.refs.datepicker);
+
         return (
             <View>
                 <TouchableOpacity onPress={this.showPicker}>
-                    <TextView style={this.props.textLabelStyles}>{this.props.date.toLocaleDateString()}</TextView>
+                    <TextView style={this.props.textLabelStyles}>
+                        { this.props.date.toLocaleDateString() }
+                    </TextView>
                 </TouchableOpacity>
 
                 <Modal visible={this.state.pickerIsVisible}
@@ -69,16 +79,18 @@ export default class DatePicker extends Component {
 
                         <View style={styles.pickerControls}>
                             <TouchableOpacity onPress={this.hidePicker}>
-                                <Icon name="close" size={25} color="#00ADEF" />
+                                <Icon name="close" size={25} color="#666" />
                             </TouchableOpacity>
                             <TouchableOpacity onPress={this.submitChanges}>
-                                <Icon name="check" size={25} color="#00ADEF" />
+                                <Icon name="check" size={25} color="#666" />
                             </TouchableOpacity>
                         </View>
 
                         <DatePickerIOS
+                            ref="datepicker"
                             date={this.state.date}
                             mode="date"
+                            itemStyle={{color: COLORS[appTheme].foreground}}
                             onDateChange={this.handleDateChange}
                         />
 
@@ -109,8 +121,6 @@ const styles = StyleSheet.create({
         bottom: 0,
         width: window.width,
         height: 200,
-        backgroundColor: '#fff',
-        borderTopWidth: 1,
-        borderTopColor: '#eaeaea'
+        backgroundColor: '#ccc'
     }
 });

@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import TextView from '../TextView';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { COLORS } from '../../../constants/Theme';
 
 const window = Dimensions.get('window');
 
@@ -25,6 +26,10 @@ export default class PickerIOS extends Component {
         this.renderOptions = this.renderOptions.bind(this);
         this.handleValueChange = this.handleValueChange.bind(this);
     }
+
+    static contextTypes = {
+        getCurrentTheme: PropTypes.func
+    };
 
     static propTypes = {
         items: PropTypes.array.isRequired,
@@ -67,10 +72,14 @@ export default class PickerIOS extends Component {
     }
 
     render() {
+        let appTheme = this.context.getCurrentTheme();
+
         return (
             <View>
                 <TouchableOpacity onPress={this.showPicker}>
-                    <TextView style={this.props.textLabelStyles}>{this.props.items[this.state.selectedValue].label}</TextView>
+                    <TextView style={this.props.textLabelStyles}>
+                        { this.props.items[this.state.selectedValue].label }
+                    </TextView>
                 </TouchableOpacity>
 
                 <Modal visible={this.state.pickerIsVisible}
@@ -82,15 +91,16 @@ export default class PickerIOS extends Component {
 
                         <View style={styles.pickerControls}>
                             <TouchableOpacity onPress={this.hidePicker}>
-                                <Icon name="close" size={25} color="#00ADEF" />
+                                <Icon name="close" size={25} color="#666" />
                             </TouchableOpacity>
                             <TouchableOpacity onPress={this.submitChanges}>
-                                <Icon name="check" size={25} color="#00ADEF" />
+                                <Icon name="check" size={25} color="#666" />
                             </TouchableOpacity>
                         </View>
 
                         <Picker selectedValue={this.state.selectedValue}
-                                onValueChange={this.handleValueChange}>
+                                onValueChange={this.handleValueChange}
+                                itemStyle={{color: COLORS[appTheme].foreground}}>
                             { this.renderOptions() }
                         </Picker>
 
@@ -121,8 +131,6 @@ const styles = StyleSheet.create({
         bottom: 0,
         width: window.width,
         height: 200,
-        backgroundColor: '#fff',
-        borderTopWidth: 1,
-        borderTopColor: '#eaeaea'
+        backgroundColor: '#ccc'
     }
 });
