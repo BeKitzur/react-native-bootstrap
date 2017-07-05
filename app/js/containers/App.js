@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { StatusBar } from 'react-native';
+import { StatusBar, Platform } from 'react-native';
 import { addNavigationHelpers } from 'react-navigation';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -34,7 +34,9 @@ class App extends Component {
         let barStyle = appTheme === 'dark' ? 'light-content' : 'dark-content';
 
         StatusBar.setBarStyle(barStyle, true);
-        StatusBar.setBackgroundColor(COLORS[appTheme].accent, true);
+        if (Platform.OS === 'android') {
+            StatusBar.setBackgroundColor(COLORS[appTheme].accent, true);
+        }
     }
 
     render() {
