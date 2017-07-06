@@ -21,7 +21,6 @@ export default function User(state = initialState, action) {
             return {
                 ...state,
                 account: {
-                    ...state.account,
                     username: payload.email,
                     password: payload.password
                 },
