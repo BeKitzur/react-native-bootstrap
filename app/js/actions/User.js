@@ -13,18 +13,25 @@ export function logIn(email, password, onLoginSuccess) {
             payload: { email, password }
         });
 
-        appFirebase.auth().signInWithEmailAndPassword(email, password)
-        .then(() => {
-            Keychain.setGenericPassword(email, password);
-            dispatch({ type: LOGIN_SUCCESS });
-            onLoginSuccess();
-        })
-        .catch(err => {
-            dispatch({
+        if (!(email && password)) {
+            return dispatch({
                 type: LOGIN_FAIL,
-                payload: err.message
+                payload: 'Please, enter valid email and password'
             });
-        });
+        }
+
+        appFirebase.auth().signInWithEmailAndPassword(email, password)
+            .then(() => {
+                Keychain.setGenericPassword(email, password);
+                dispatch({ type: LOGIN_SUCCESS });
+                onLoginSuccess();
+            })
+            .catch(err => {
+                dispatch({
+                    type: LOGIN_FAIL,
+                    payload: err.message
+                });
+            });
     };
 }
 
