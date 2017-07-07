@@ -56,15 +56,17 @@ export function getAuthenticatedAccount() {
         });
 
         try {
-            let credentials = await Keychain.getGenericPassword();
+            let { username, password } = await Keychain.getGenericPassword(),
+                user = appFirebase.auth().signInWithEmailAndPassword(username, password);
 
-            if (credentials) {
+
+            if (user) {
                 dispatch({
                     type: GET_AUTHENTICATED_ACCOUNT_SUCCESS,
-                    payload: credentials
+                    payload: { username, password }
                 });
             } else {
-                throw new Error('User is not logged in!');
+                throw new Error('Failed to relogin user!');
             }
         }
         catch(err) {
