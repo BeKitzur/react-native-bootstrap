@@ -14,7 +14,7 @@ Open ``ios/ReactNativeBootstrap.xcworkspace`` with Xcode, then run ``Build`` com
 
 ### Running on Android
 
-Open ``android/`` directory with Android Studio, then press ``Run 'app'`` button (or ``^R``)
+Open terminal under project directory, check connected phusical/virtual devices via ``adb devices``, then run the following command ``react-native run-android``
 
 ### Generate signed .apk
 
