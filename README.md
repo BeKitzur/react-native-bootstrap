@@ -19,4 +19,5 @@ Open ``android/`` directory with Android Studio, then press ``Run 'app'`` button
 ### Troubleshooting
 
 1) Error while running Gradle sync ``The SDK Build Tools revision (23.0.1) is too low for project ':react-native-vector-icons'. Minimum required is 25.0.0`` just click <a href="#">Update Build Tools version and sync project</a><br>
+2) Error while building iOS app ``Cannot find config.h file`` - navigate to ``<project_dir>/node_modules/react-native/`` and remove ``third-party`` folder, then try again.
 
